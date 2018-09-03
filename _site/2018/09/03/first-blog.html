@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第一篇随笔 - 随笔</title>
+    <meta name="author"  content="doteve43">
+    <meta name="description" content="第一篇随笔">
+    <meta name="keywords"  content="jekyll, 开发">
+    <!-- Open Graph -->
+    <meta property="og:title" content="第一篇随笔 - 随笔">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://localhost:4000/2018/09/03/first-blog.html">
+    <meta property="og:description" content="游戏，摄影，代码，旅行">
+    <meta property="og:site_name" content="随笔">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+	
+	<!--
+Author: Ray-Eldath
+refer to:
+ - http://docs.mathjax.org/en/latest/options/index.html
+-->
+
+	<script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+		jax: ["input/TeX", "output/HTML-CSS"],
+		tex2jax: {
+			inlineMath: [ ["$", "$"] ],
+			displayMath: [ ["$$", "$$"] ],
+			skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+		},
+		"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+      });
+    </script>
+
+	
+    <!--
+Author: Ray-Eldath
+-->
+<style>
+    .markdown-body .anchor{
+        float: left;
+        margin-top: -8px;
+        margin-left: -20px;
+        padding-right: 4px;
+        line-height: 1;
+        opacity: 0;
+    }
+
+    .markdown-body .anchor .anchor-icon{
+        font-size: 15px
+    }
+</style>
+<script>
+    $(document).ready(function() {
+        let nodes = document.querySelector(".markdown-body").querySelectorAll("h1,h2,h3")
+        for(let node of nodes) {
+            var anchor = document.createElement("a")
+            var anchorIcon = document.createElement("i")
+            anchorIcon.setAttribute("class", "fa fa-anchor fa-lg anchor-icon")
+            anchorIcon.setAttribute("aria-hidden", true)
+            anchor.setAttribute("class", "anchor")
+            anchor.setAttribute("href", "#" + node.getAttribute("id"))
+
+            anchor.onmouseover = function() {
+                this.style.opacity = "0.4"
+            }
+
+            anchor.onmouseout = function() {
+                this.style.opacity = "0"
+            }
+
+            anchor.appendChild(anchorIcon)
+            node.appendChild(anchor)
+        }
+    })
+</script>
+
+</head>
+
+
+<body>
+  <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+  <input id="nm-switch" type="hidden" value="true"> <header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">home</a></li>
+            
+            <li><a href="/tags.html">tags</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+  <header class="g-banner post-header post-pattern-circuitBoard bgcolor-default post-no-cover" data-theme="default">
+    <div class="post-wrapper">
+      <div class="post-tags">
+        
+          
+            <a href="http://localhost:4000/tags#jekyll" class="post-tag">jekyll</a>
+          
+            <a href="http://localhost:4000/tags#%E5%BC%80%E5%8F%91" class="post-tag">开发</a>
+          
+        
+      </div>
+      <h1>第一篇随笔</h1>
+      <div class="post-meta">
+        <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="http://localhost:4000" target="_blank" rel="author">doteve43</a></></span>
+        <time class="post-meta-item" datetime="18-09-03"><i class="iconfont icon-date"></i>03 Sep 2018</time>
+      </div>
+    </div>
+    
+  </header>
+
+  <div class="post-content visible">
+    
+    <h2 class="post-subtitle">感谢开源社区</h2>
+    
+
+    <article class="markdown-body">
+      <p>之前一直有想写blog，一是想记录一下工作中遇到的问题或者学习到的内容，这样查找起来会比较方便，二是想分享平时玩到好的游戏，看到好的影视作品，三是想锻炼一下我这弱鸡般的表达能力。但是无奈种种原因（其实就是懒！），最后也就在简书写了一篇文章就搁置了起来。</p>
+
+<p>不过最近这段时间，工作不算很忙，但是遇到的问题还是比较多的，所以就想写blog，但是又想做一些稍微不同的事情，所以就找到了目前的解决方案。</p>
+
+<h2 id="在此必须先感谢开源社区没有大牛的开源项目无法在如此少的时间内搭建一个看上去如此炫酷的blog">在此必须先感谢开源社区，没有大牛的开源项目，无法在如此少的时间内搭建一个看上去如此炫酷的blog。</h2>
+
+<p>使用的方案是 <a href="https://pages.github.com/">GitHub pages</a> + <a href="https://www.jekyll.com.cn/">jekyll</a> + <a href="https://github.com/kaeyleo/jekyll-theme-H2O">h2o</a>（theme）</p>
+
+<p>部署之后就可以开始写blog，第一周的文章还没有想好内容，可能会写一些iOS基础文章(没错，我还是个iOS开发菜鸟)，所以我需要记录遇到的问题，尽快进步吧。</p>
+
+<h3 id="那就下次再见吧">那就下次再见吧</h3>
+
+    </article>
+
+    
+    <div class="social-share-wrapper">
+      <div class="social-share"></div>
+    </div>
+    
+  </div>
+
+  <section class="author-detail">
+    <section class="post-footer-item author-card">
+      <div class="avatar">
+        <img src="http://localhost:4000/assets/img/profile.png" alt="">
+      </div>
+      <div class="author-name" rel="author">doteve43</div>
+      <div class="bio">
+        <p>iOS开发，TVGame爱好者</p>
+      </div>
+      
+      <ul class="sns-links">
+        
+        <li>
+          <a href="//weibo.com/u/2314345484" target="_blank">
+                    <i class="iconfont icon-weibo"></i>
+                </a>
+        </li>
+        
+        <li>
+          <a href="//github.com/doteve43" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+        </li>
+        
+      </ul>
+      
+    </section>
+    <section class="post-footer-item read-next">
+      
+
+      
+      <div class="read-next-item">
+        <a href="/2017/04/18/new-theme-h2o.html" class="read-next-link"></a>
+          <section>
+            <span>H2O theme for Jekyll</span>
+            <p>正如我在微博上所说的，使用Jekyll半年以来一直没有令我满意的主题模板，所以开始计划自己写一套好看又好用的主题模...</p>
+          </section>
+          
+          <div class="filter"></div>
+          <img src="http://on2171g4d.bkt.clouddn.com/jekyll-theme-h2o-postcover.jpg" alt="">
+          
+      </div>
+      
+    </section>
+    <section class="post-footer-item comment">
+      <div id="disqus_thread"></div>
+    </section>
+  </section>
+
+  <footer class="g-footer">
+  <section>随笔 ©
+  
+  
+  2018
+  </section>
+  <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+
+  <script src="/assets/js/social-share.min.js"></script>
+  <script>
+    socialShare('.social-share', {
+      sites: [
+        
+          'wechat'
+          ,
+          
+        
+          'weibo'
+          ,
+          
+        
+          'douban'
+          ,
+          
+        
+          'twitter'
+          
+        
+      ],
+      wechatQrcodeTitle: "分享到微信朋友圈",
+      wechatQrcodeHelper: '<p>扫码后点击右上角</p><p>将本文分享至朋友圈</p>'
+    });
+  </script>
+
+  
+
+  <script src="/assets/js/prism.js"></script>
+  <script src="/assets/js/index.min.js"></script>
+</body>
+
+</html>
