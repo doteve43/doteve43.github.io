@@ -5,36 +5,9 @@
     <description>游戏，摄影，代码，旅行</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 23 Sep 2018 13:19:44 +0800</pubDate>
-    <lastBuildDate>Sun, 23 Sep 2018 13:19:44 +0800</lastBuildDate>
+    <pubDate>Sun, 23 Sep 2018 13:29:18 +0800</pubDate>
+    <lastBuildDate>Sun, 23 Sep 2018 13:29:18 +0800</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
-    
-      <item>
-        <title>第一篇随笔</title>
-        <description>&lt;p&gt;之前一直有想写blog，一是想记录一下工作中遇到的问题或者学习到的内容，这样查找起来会比较方便，二是想分享平时玩到好的游戏，看到好的影视作品，三是想锻炼一下我这弱鸡般的表达能力。但是无奈种种原因（其实就是懒！），最后也就在简书写了一篇文章就搁置了起来。&lt;/p&gt;
-
-&lt;p&gt;不过最近这段时间，工作不算很忙，但是遇到的问题还是比较多的，所以就想写blog，但是又想做一些稍微不同的事情，所以就找到了目前的解决方案。&lt;/p&gt;
-
-&lt;h2 id=&quot;在此必须先感谢开源社区没有大牛的开源项目无法在如此少的时间内搭建一个看上去如此炫酷的blog&quot;&gt;在此必须先感谢开源社区，没有大牛的开源项目，无法在如此少的时间内搭建一个看上去如此炫酷的blog。&lt;/h2&gt;
-
-&lt;p&gt;使用的方案是 &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub pages&lt;/a&gt; + &lt;a href=&quot;https://www.jekyll.com.cn/&quot;&gt;jekyll&lt;/a&gt; + &lt;a href=&quot;https://github.com/kaeyleo/jekyll-theme-H2O&quot;&gt;h2o&lt;/a&gt;（theme）&lt;/p&gt;
-
-&lt;p&gt;部署之后就可以开始写blog，第一周的文章还没有想好内容，可能会写一些iOS基础文章(没错，我还是个iOS开发菜鸟)，所以我需要记录遇到的问题，尽快进步吧。&lt;/p&gt;
-
-&lt;h3 id=&quot;那就下次再见吧&quot;&gt;那就下次再见吧&lt;/h3&gt;
-</description>
-        <pubDate>Mon, 03 Sep 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2018/09/03/first-blog.html</link>
-        <guid isPermaLink="true">http://localhost:4000/2018/09/03/first-blog.html</guid>
-        
-        <category>jekyll</category>
-        
-        <category>开发</category>
-        
-        
-        <category>随笔</category>
-        
-      </item>
     
       <item>
         <title>wkwebview基础总结</title>
@@ -249,14 +222,41 @@
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>Tue, 18 Apr 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2017/04/18/wkwebview-blog.html</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/04/18/wkwebview-blog.html</guid>
+        <pubDate>Sun, 23 Sep 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/09/23/wkwebview-blog.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/09/23/wkwebview-blog.html</guid>
         
         <category>iOS开发</category>
         
         
         <category>技术</category>
+        
+      </item>
+    
+      <item>
+        <title>第一篇随笔</title>
+        <description>&lt;p&gt;之前一直有想写blog，一是想记录一下工作中遇到的问题或者学习到的内容，这样查找起来会比较方便，二是想分享平时玩到好的游戏，看到好的影视作品，三是想锻炼一下我这弱鸡般的表达能力。但是无奈种种原因（其实就是懒！），最后也就在简书写了一篇文章就搁置了起来。&lt;/p&gt;
+
+&lt;p&gt;不过最近这段时间，工作不算很忙，但是遇到的问题还是比较多的，所以就想写blog，但是又想做一些稍微不同的事情，所以就找到了目前的解决方案。&lt;/p&gt;
+
+&lt;h2 id=&quot;在此必须先感谢开源社区没有大牛的开源项目无法在如此少的时间内搭建一个看上去如此炫酷的blog&quot;&gt;在此必须先感谢开源社区，没有大牛的开源项目，无法在如此少的时间内搭建一个看上去如此炫酷的blog。&lt;/h2&gt;
+
+&lt;p&gt;使用的方案是 &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub pages&lt;/a&gt; + &lt;a href=&quot;https://www.jekyll.com.cn/&quot;&gt;jekyll&lt;/a&gt; + &lt;a href=&quot;https://github.com/kaeyleo/jekyll-theme-H2O&quot;&gt;h2o&lt;/a&gt;（theme）&lt;/p&gt;
+
+&lt;p&gt;部署之后就可以开始写blog，第一周的文章还没有想好内容，可能会写一些iOS基础文章(没错，我还是个iOS开发菜鸟)，所以我需要记录遇到的问题，尽快进步吧。&lt;/p&gt;
+
+&lt;h3 id=&quot;那就下次再见吧&quot;&gt;那就下次再见吧&lt;/h3&gt;
+</description>
+        <pubDate>Mon, 03 Sep 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/09/03/first-blog.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/09/03/first-blog.html</guid>
+        
+        <category>jekyll</category>
+        
+        <category>开发</category>
+        
+        
+        <category>随笔</category>
         
       </item>
     
