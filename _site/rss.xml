@@ -5,8 +5,8 @@
     <description>游戏，摄影，代码，旅行</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 03 Sep 2018 22:45:29 +0800</pubDate>
-    <lastBuildDate>Mon, 03 Sep 2018 22:45:29 +0800</lastBuildDate>
+    <pubDate>Sun, 23 Sep 2018 13:19:44 +0800</pubDate>
+    <lastBuildDate>Sun, 23 Sep 2018 13:19:44 +0800</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
     
       <item>
@@ -33,6 +33,230 @@
         
         
         <category>随笔</category>
+        
+      </item>
+    
+      <item>
+        <title>wkwebview基础总结</title>
+        <description>&lt;p&gt;最近有个webapp的项目交到我的手上，说是有些问题，比如某些iPhone无法打开视频，启动有时比较慢等问题。其实这个项目我客户端处理的只是展示一个webview，显示的内容都是前端控制的，遇到这些问题我只能从webview下手。所幸苹果公司在iOS8之后推出wkwebview可以替换现在项目使用的uiwebview。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h2 id=&quot;使用效果&quot;&gt;使用效果&lt;/h2&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;替换了wkwebview之后，之前所说的怪问题都解决了，更好的是，内存占用比之前减少了70%左右，顺便添加了左右划动手势和进度条显示，更加方便操作。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h2 id=&quot;如何从uiwebview过渡到wkwebview&quot;&gt;如何从uiwebview过渡到wkwebview&lt;/h2&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;其实基本使用方法是一样的，主要实现wkwebview几个delegate&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;WKNavigationDelegate&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;WKNavigationDelegate主要负责跳转、加载处理等操作。&lt;/p&gt;
+
+&lt;p&gt;需要实现的方法为：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler;
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler;
+
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation;
+
+
+- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(null_unspecified WKNavigation *)navigation;
+
+
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error;
+
+
+- (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
+
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation;
+
+
+- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error;
+
+
+- (void)webView:(WKWebView *)webView didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler;
+
+
+- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView API_AVAILABLE(macosx(10.11), ios(9.0));
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;其中比较重要的是decidePolicyForNavigationResponse这个方法，这个方法会在wkwebview收到网页响应之后调用，在这个方法可以处理是否对此网页进行跳转。
+公司项目中遇到的大部分问题都可以在这个回调中进行处理，大致方法为：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;navigationAction.request.URL.absoluteString&lt;/code&gt;通过这个方法可以获取到需要拦截的url，如果需要进行拦截就调用&lt;code class=&quot;highlighter-rouge&quot;&gt;decisionHandler(WKNavigationActionPolicyCancel);&lt;/code&gt;,如果无需处理就调用&lt;code class=&quot;highlighter-rouge&quot;&gt;decisionHandler(WKNavigationActionPolicyAllow);&lt;/code&gt;。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;WKUIDelegate&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;WKUIDelegate主要是处理js回调的确认框，警告框等。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#pragma mark -WKUIDelegate
+- (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures
+{
+    //创建一个新的webView-createWebViewWithConfiguration
+    return [[WKWebView alloc] init];
+}
+
+// 输入框
+- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler
+{
+    completionHandler(YES);
+
+}
+// 确认框
+- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL result))completionHandler
+{
+    completionHandler(YES);
+
+}
+// 警告框
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
+{
+    completionHandler();
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;公司项目没有使用到这个回调的方法， 所以具体使用方法不是十分了解，具体使用方法可以去&lt;a href=&quot;https://developer.apple.com/documentation/webkit/wkuidelegate?language=objc&quot;&gt;苹果官方文档&lt;/a&gt;进行查询。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;WKScriptMessageHandler&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;WKScriptMessageHandler是处理OC和js交互逻辑。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;OC–&amp;gt;js&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;OC调用js的方法：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[webView evaluateJavaScript:@&quot;XXXX&quot; completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+        NSLog(@&quot;%@&quot;,result);
+    }];
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;其中XXXX就是js方法名，completionHandler会回调的block。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;js–&amp;gt;OC&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;js调用OC的方法：&lt;/p&gt;
+
+&lt;p&gt;1)首先js和OC要先定义一个handler名，在wkwebview初始化的时候设置，js通过这个名字来发送消息，OC也通过这个名字来判断回调过来是哪一个方法。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;_scriptHandlerName = @&quot;XXXX&quot;;
+       WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc]init];
+       WKUserContentController *userContentController = [[WKUserContentController alloc] init];
+
+       [userContentController addScriptMessageHandler:self name:_scriptHandlerName];
+       config.userContentController = userContentController;
+       CGFloat mainWidth = [UIScreen mainScreen].bounds.size.width;
+       CGFloat mainHeight = [UIScreen mainScreen].bounds.size.height;
+       CGRect statusRect = [[UIApplication sharedApplication] statusBarFrame];
+       _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, statusRect.size.height-1, mainWidth, mainHeight-statusRect.size.height) configuration:config];
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这里是简单初始化wkwebview的方法，XXXX就是handler名，需要将这个handler名告诉给前端开发。&lt;/p&gt;
+
+&lt;p&gt;2）前端js调用方法为：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;window.webkit.messageHandlers.XXXX.postMessage(xx);&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;XXXX也就是上述说的handler名，postMessage携带的变量就是js需要回调给OC的内容。&lt;/p&gt;
+
+&lt;p&gt;3）OC处理回调&lt;/p&gt;
+
+&lt;p&gt;OC需要先实现delegate的方法&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
+    //收到js回调
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;message.body 就是js回调回来的内容。拿到内调内容就可以进行处理啦。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h2 id=&quot;遇到的问题&quot;&gt;遇到的问题&lt;/h2&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;1.在调用支付宝和微信的时候发现wkwebview无法拉起微信或者支付宝app。之前的uiwebview通过alipay://或者weixin://可以直接打开客户端，但是kwwebview似乎只是单纯的加载这个url（原因不明），所以需要手动去加载。&lt;/p&gt;
+&lt;h3 id=&quot;解决方法&quot;&gt;解决方法&lt;/h3&gt;
+&lt;p&gt;在decidePolicyForNavigationResponse 回调中 拦截url，比如拦截alipay://开头的url就使用&lt;code class=&quot;highlighter-rouge&quot;&gt;[UIApplication sharedApplication] openurl&lt;/code&gt;方法打开这个url，这样就可以解决问题了。&lt;/p&gt;
+
+&lt;p&gt;2.测试发现，使用h5支付宝支付完成之后返回项目页面，再点返回（或者手势右划）又会返回支付宝完成界面，再右划会返回输密码的界面，体验上有问题。&lt;/p&gt;
+&lt;h3 id=&quot;解决方法-1&quot;&gt;解决方法&lt;/h3&gt;
+&lt;p&gt;其实思路和上面的一样，也是拦截url，当界面是支付宝完成的url时（非支付时自动跳转），就直接返回&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;decisionHandler(WKNavigationActionPolicyCancel);&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;就可以解决问题。&lt;/p&gt;
+
+&lt;p&gt;3.js在发消息给oc的时候报错，undefined type error&lt;/p&gt;
+&lt;h3 id=&quot;解决方法-2&quot;&gt;解决方法&lt;/h3&gt;
+&lt;p&gt;问前端说什么都没改，但是第二天自动就好了，原因不明。&lt;/p&gt;
+
+&lt;p&gt;4.在调试的时候遇到过白屏，比较严重，特别是从微信支付回调回项目中，三次基本上就会出现白屏，而且无论做什么操作（比如手势返回到上个界面），也会出现白屏。&lt;/p&gt;
+&lt;h3 id=&quot;解决方法-3&quot;&gt;解决方法&lt;/h3&gt;
+&lt;p&gt;这个问题在第二天就没有再出现了，原因也不明。我怀疑是本地缓存的问题，所以我找了一些清除缓存的方法，但是这个现象没有再出现，所以解决方法需要等待验证。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//基于ios9，开发过程中遇到过微信返回游戏有概率出现白屏，无日志，没有走到任何回调，原因不明，此方法能否解决问题不明，需待测试
+-(void) cleanCache {
+    // 清除所有
+    //NSSet *websiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes];
+    NSSet *websiteDataTypes= [NSSet setWithArray:@[
+
+            WKWebsiteDataTypeDiskCache,
+
+            WKWebsiteDataTypeOfflineWebApplicationCache,
+
+            WKWebsiteDataTypeMemoryCache,
+
+            WKWebsiteDataTypeLocalStorage,
+
+            //WKWebsiteDataTypeCookies,
+
+            //WKWebsiteDataTypeSessionStorage,
+
+            //WKWebsiteDataTypeIndexedDBDatabases,
+
+            //WKWebsiteDataTypeWebSQLDatabases
+
+    ]];
+
+    //// Date from
+
+    NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
+
+    //// Execute
+
+    [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
+
+        // Done
+        NSLog(@&quot;清楚缓存完毕&quot;);
+
+    }];
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Tue, 18 Apr 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/04/18/wkwebview-blog.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/04/18/wkwebview-blog.html</guid>
+        
+        <category>iOS开发</category>
+        
+        
+        <category>技术</category>
         
       </item>
     
